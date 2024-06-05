@@ -1,37 +1,12 @@
+@import "./partials/variables";
+@import "./partials/reset";
+@import "./partials/placeholder";
+@import "./partials/mixins";
+
 // 1) variabili in SASS
-$main-color: purple;
-$secondary-color: blue;
-$tertiary-color: palegreen;
-$body-color: rgb(27, 25, 25);
-$sans-serif: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-$serif: "Georgia", serif;
+// vedi partials _variables.scss
 
-$size-0: 0rem;
-$size-1: 0.25rem;
-$size-2: 0.5rem;
-$size-3: 1rem;
-$size-4: 1.5rem;
-$size-5: 3rem;
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  margin: $size-0;
-  // le variabili SASS possono essere utilizzate direttamente senza particolari accorgimenti/strumenti
-  //   font-family: $sans-serif;
-
-  //   SASS permette di raggruppare le proprietà composte
-  font: {
-    family: $sans-serif;
-    size: $size-3;
-    weight: normal;
-  }
-  color: $body-color;
-}
+// per reset vedi _reset.scss
 
 // h1 {
 //   font-family: $serif;
@@ -147,12 +122,6 @@ main {
 // 4) PLACEHOLDER (%nomePlacehoder) - questa modalità di creazione di un selettore ci servirà a creare un blocco CSS che non esisterà di suo, a meno che
 // non venga UTILIZZATO all'interno di un selettore. Rispetto ad estendere elementi esistenti sarà un blocco che esisterà solo nel momento in cui verrà utilizzato.
 
-%main-btn {
-  padding: $size-1 $size-2;
-  border: 2px solid black;
-  border-radius: 6px;
-}
-
 .btn-1 {
   @extend %main-btn;
   background-color: adjust-hue($tertiary-color, $degrees: 100);
@@ -176,19 +145,10 @@ main {
 
 // MIXIN (@mixin) - blocco di codice CSS che può generarsi anche a partire da valori dinamici (o parametri)
 
-@mixin customBox($color: $main-color, $padding: $size-2, $radius: 10px, $borderSize: 1px) {
-  width: 200px;
-  height: 200px;
-  font-weight: 700;
-  display: inline-block;
-  vertical-align: bottom;
-  margin-right: -2px;
-  padding: $padding;
-  color: scale-color($color, $lightness: -70%);
-  background-color: $color;
-  border: $borderSize solid scale-color($color, $lightness: -30%);
-  border-radius: $radius;
-}
+// @mixin customBox {} // mixin senza parametri
+
+// mixin con parametri dinamici
+// vedi partial _mixins.scss
 
 section:nth-of-type(2) {
   margin-top: $size-5;
@@ -208,4 +168,105 @@ section:nth-of-type(2) {
 // in questo caso tra tutti i parametri facoltativi, stiamo assegnando il valore ad uno specifico, senza necessariamente rispettare un ordine.
 .box-4 {
   @include customBox($padding: 15px);
+}
+
+// 6) INTERPOLAZIONE DI VALORE #{} - ricorda molto l'interpolazione di una stringa template in Javascript ==> `testo della stringa ${valoreDinamico}`
+
+// 6b) Condizionali @if(){} @else{}
+// vedi partial _mixins.scss
+
+.box-5 {
+  @include dynamicBox(190px, "color", $main-color);
+}
+
+.box-6 {
+  @include dynamicBox(
+    250px,
+    "image",
+    url("https://images.unsplash.com/photo-1716673632685-f65942da4387?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+  );
+}
+
+// 7) PARTIALS - partials sono dei file con un _ nel nome, che li identifica come partial.
+// Un file partial non sarà il punto di ingresso per il compilatore.
+// i fogli parziali ci serviranno per mantenere un certo ordine nella nostra codebase.
+
+// 8) CICLI
+
+// 8a) CICLO FOR - funziona con valori Numerici DA / A
+// @for $contatore from <start> to <end>
+// @for $contatore from 0 to 5 - il "to" rappresenta il valore 5 ESCLUSO!
+
+// @for $contatore from <start> through <end>
+// @for $contatore from 0 through 5 - il "through" rappresenta il valore 5 INCLUSO!
+
+@for $i from 1 through 10 {
+  .custom-ps-#{$i} {
+    padding-inline-start: calc($i * 0.5rem);
+  }
+}
+
+// 8b) CICLO EACH - è un altro tipo di ciclo che sfrutta una struttura di tipo lista o mappa
+
+$colorList: red, green, blue, yellow, purple, orange;
+
+@each $color in $colorList {
+  .box-#{$color} {
+    background-color: $color;
+  }
+}
+
+@for $i from 1 to length($colorList) {
+  $elem: nth($colorList, $i);
+
+  .another-box-#{$elem} {
+    background-color: $elem;
+  }
+}
+
+// $colorListHex: #ff0000, #008a00, #0000fa, #fa8210, #ffaff0;
+// @each $color in $colorListHex {
+// .box-hex-#{$color} {
+//   background-color: $color;
+// }
+// }
+
+$colorMapHex: (
+  red: #ff0000,
+  green: #008a00,
+  blue: #0000fa,
+  orange: #fa8210,
+  lilly: #ffaff0
+);
+
+@each $key, $value in $colorMapHex {
+  .box-hex-#{$key} {
+    background-color: $value;
+  }
+}
+
+$sizes: (
+  xs: 10px,
+  sm: 20px,
+  md: 30px,
+  lg: 50px,
+  xl: 100px
+);
+
+@each $key, $value in $sizes {
+  .padding-inline-#{$key} {
+    padding-inline: $value;
+  }
+
+  .padding-block-#{$key} {
+    padding-block: $value;
+  }
+
+  .margin-inline-#{$key} {
+    margin-inline: $value;
+  }
+
+  .margin-block-#{$key} {
+    margin-block: $value;
+  }
 }
