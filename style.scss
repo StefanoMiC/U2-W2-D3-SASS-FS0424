@@ -1,0 +1,211 @@
+// 1) variabili in SASS
+$main-color: purple;
+$secondary-color: blue;
+$tertiary-color: palegreen;
+$body-color: rgb(27, 25, 25);
+$sans-serif: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+$serif: "Georgia", serif;
+
+$size-0: 0rem;
+$size-1: 0.25rem;
+$size-2: 0.5rem;
+$size-3: 1rem;
+$size-4: 1.5rem;
+$size-5: 3rem;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: $size-0;
+  // le variabili SASS possono essere utilizzate direttamente senza particolari accorgimenti/strumenti
+  //   font-family: $sans-serif;
+
+  //   SASS permette di raggruppare le proprietà composte
+  font: {
+    family: $sans-serif;
+    size: $size-3;
+    weight: normal;
+  }
+  color: $body-color;
+}
+
+// h1 {
+//   font-family: $serif;
+//   margin-top: $size-0;
+//   color: $secondary-color;
+// }
+
+// main .hero ul {
+//   list-style: none;
+// }
+
+// main .hero ul li {
+//   padding-block: $size-2;
+// }
+
+// 2) NESTING (annidamento) dei selettori CSS
+
+main {
+  .main-image {
+    min-height: 20vh;
+    // altro uso di proprietà abbreviate
+    background: {
+      image: url("https://images.unsplash.com/photo-1715464881844-a6de4a3b004c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      size: 100%;
+      position: center 70%;
+      repeat: no-repeat;
+    }
+  }
+  .hero {
+    border: 2px solid $secondary-color;
+    text-align: center;
+
+    // media query integrata nel selettore che andrà a modificare
+    // (non serve ripetere il selettore dell'elemento che vogliamo modificare)
+    @media screen and (min-width: 768px) {
+      text-align: initial;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        padding-block: $size-1;
+      }
+    }
+
+    &__button {
+      padding: $size-1 $size-2;
+      background-color: transparent;
+      border: 1px solid transparent;
+
+      &--primary {
+        background-color: $main-color;
+        border-color: $main-color;
+        &--extra {
+          background-color: black;
+          color: white;
+          &:hover {
+            background-color: white;
+            color: black;
+          }
+        }
+      }
+      &--secondary {
+        background-color: $secondary-color;
+        border-color: $secondary-color;
+      }
+      &--tertiary {
+        background-color: $tertiary-color;
+        border-color: $tertiary-color;
+      }
+    }
+  }
+
+  section {
+    ul {
+      // parent selector
+      &:hover {
+        border: 2px solid $main-color;
+      }
+      li {
+        padding-inline: $size-3;
+        // parent selector
+        &::marker {
+          content: "✌️";
+        }
+      }
+    }
+  }
+}
+
+.main-title {
+  font: {
+    family: $serif;
+    size: 64px;
+  }
+
+  letter-spacing: -2px;
+  line-height: 0.7;
+  color: $tertiary-color;
+  background-color: $body-color;
+}
+
+// 3) EXTEND (@extend) - questa keyword è in grado di fornirci l'intero blocco di CSS già specificato in un altro selettore (id/classe/tag) definito in precedenza
+
+.secondary-title {
+  @extend .main-title;
+
+  font-size: 48px;
+  line-height: 1;
+}
+
+// 4) PLACEHOLDER (%nomePlacehoder) - questa modalità di creazione di un selettore ci servirà a creare un blocco CSS che non esisterà di suo, a meno che
+// non venga UTILIZZATO all'interno di un selettore. Rispetto ad estendere elementi esistenti sarà un blocco che esisterà solo nel momento in cui verrà utilizzato.
+
+%main-btn {
+  padding: $size-1 $size-2;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+.btn-1 {
+  @extend %main-btn;
+  background-color: adjust-hue($tertiary-color, $degrees: 100);
+  border-color: scale-color(adjust-hue($tertiary-color, $degrees: 100), $lightness: -50%);
+  color: scale-color(adjust-hue($tertiary-color, $degrees: 100), $lightness: -70%);
+}
+
+.btn-2 {
+  @extend %main-btn;
+  background-color: complement($tertiary-color);
+  border-color: scale-color(complement($tertiary-color), $lightness: -50%);
+  color: scale-color(complement($tertiary-color), $lightness: -80%);
+}
+
+.btn-3 {
+  @extend %main-btn;
+  background-color: $tertiary-color;
+  border-color: scale-color($tertiary-color, $lightness: -50%);
+  color: scale-color($tertiary-color, $lightness: -80%);
+}
+
+// MIXIN (@mixin) - blocco di codice CSS che può generarsi anche a partire da valori dinamici (o parametri)
+
+@mixin customBox($color: $main-color, $padding: $size-2, $radius: 10px, $borderSize: 1px) {
+  width: 200px;
+  height: 200px;
+  font-weight: 700;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: -2px;
+  padding: $padding;
+  color: scale-color($color, $lightness: -70%);
+  background-color: $color;
+  border: $borderSize solid scale-color($color, $lightness: -30%);
+  border-radius: $radius;
+}
+
+section:nth-of-type(2) {
+  margin-top: $size-5;
+  padding-inline: $size-3;
+}
+
+.box-1 {
+  @include customBox(coral, 20px);
+}
+.box-2 {
+  @include customBox(aqua, 10px, 6px);
+}
+.box-3 {
+  @include customBox(palevioletred, 30px);
+}
+
+// in questo caso tra tutti i parametri facoltativi, stiamo assegnando il valore ad uno specifico, senza necessariamente rispettare un ordine.
+.box-4 {
+  @include customBox($padding: 15px);
+}
