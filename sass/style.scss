@@ -2,28 +2,23 @@
 @import "./partials/reset";
 @import "./partials/placeholder";
 @import "./partials/mixins";
+@import "./partials/loops";
 
 // 1) variabili in SASS
 // vedi partials _variables.scss
-
 // per reset vedi _reset.scss
-
 // h1 {
 //   font-family: $serif;
 //   margin-top: $size-0;
 //   color: $secondary-color;
 // }
-
 // main .hero ul {
 //   list-style: none;
 // }
-
 // main .hero ul li {
 //   padding-block: $size-2;
 // }
-
 // 2) NESTING (annidamento) dei selettori CSS
-
 main {
   .main-image {
     min-height: 20vh;
@@ -187,6 +182,10 @@ section:nth-of-type(2) {
   );
 }
 
+.box-7 {
+  @include anotherBox(200px, "false");
+}
+
 // 7) PARTIALS - partials sono dei file con un _ nel nome, che li identifica come partial.
 // Un file partial non sarà il punto di ingresso per il compilatore.
 // i fogli parziali ci serviranno per mantenere un certo ordine nella nostra codebase.
@@ -207,75 +206,4 @@ section:nth-of-type(2) {
 }
 
 // 8b) CICLO EACH - è un altro tipo di ciclo che sfrutta una struttura di tipo lista o mappa
-
-$colorList: red, green, blue, yellow, purple, orange;
-
-@each $color in $colorList {
-  .box-#{$color} {
-    background-color: $color;
-  }
-}
-
-// questo sistema ci permette di avere sia un valore di indice a disposizione sia il valore dell'elemento di una lista
-@for $i from 1 to length($colorList) {
-  $elem: nth($colorList, $i);
-
-  .another-box-#{$i} {
-    // .another-box-1,  .another-box-2,  .another-box-3 ecc...
-    background-color: $elem; // background-color: red, background-color: green, background-color: blue, ecc...
-  }
-}
-
-// $colorListHex: #ff0000, #008a00, #0000fa, #fa8210, #ffaff0;
-// @each $color in $colorListHex {
-// .box-hex-#{$color} { // ERRORE!
-//   background-color: $color;
-// }
-// }
-
-// quando abbiamo a che fare con numeri in formato esadecimane, il sistema di applicare il valore della lista come suffisso
-// della nostra classe non funzione, ci dà errore.
-// a questo punto è forse più conveniente utilizzare un'altra struttura che è la mappa (una sorta di lista ma con coppie chiave-valore)
-
-$colorMapHex: (
-  red: #ff0000,
-  green: #008a00,
-  blue: #0000fa,
-  orange: #fa8210,
-  lilly: #ffaff0
-);
-
-// quando utilizziamo @each con una mappa dobbiamo prevedere due variabili invece che una,
-// la prima prenderà il valore della chiave la seconda quella del valore all'interno della stessa
-
-@each $key, $value in $colorMapHex {
-  .box-hex-#{$key} {
-    background-color: $value;
-  }
-}
-
-$sizes: (
-  xs: 10px,
-  sm: 20px,
-  md: 30px,
-  lg: 50px,
-  xl: 100px
-);
-
-@each $key, $value in $sizes {
-  .padding-inline-#{$key} {
-    padding-inline: $value;
-  }
-
-  .padding-block-#{$key} {
-    padding-block: $value;
-  }
-
-  .margin-inline-#{$key} {
-    margin-inline: $value;
-  }
-
-  .margin-block-#{$key} {
-    margin-block: $value;
-  }
-}
+// vedi partial _loops.scss

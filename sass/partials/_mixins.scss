@@ -33,3 +33,17 @@
     justify-content: center;
   }
 }
+
+@mixin anotherBox($size, $negMargin) {
+  width: $size;
+  height: calc($size * 2);
+  display: inline-block;
+  vertical-align: bottom;
+  @if ($negMargin == "true") {
+    margin-right: -2px;
+  }
+
+  @if ($size >= 100) {
+    padding: $size;
+  }
+}

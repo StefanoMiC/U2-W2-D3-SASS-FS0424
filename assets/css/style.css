@@ -19,6 +19,146 @@ body {
   border-radius: 6px;
 }
 
+.box-red {
+  background-color: red;
+}
+
+.box-green {
+  background-color: green;
+}
+
+.box-blue {
+  background-color: blue;
+}
+
+.box-yellow {
+  background-color: yellow;
+}
+
+.box-purple {
+  background-color: purple;
+}
+
+.box-orange {
+  background-color: orange;
+}
+
+.another-box-1 {
+  background-color: #ff0000;
+}
+
+.another-box-2 {
+  background-color: #008a00;
+}
+
+.another-box-3 {
+  background-color: #0000fa;
+}
+
+.another-box-4 {
+  background-color: #fa8210;
+}
+
+.box-hex-red {
+  background-color: #ff0000;
+}
+
+.box-hex-green {
+  background-color: #008a00;
+}
+
+.box-hex-blue {
+  background-color: #0000fa;
+}
+
+.box-hex-orange {
+  background-color: #fa8210;
+}
+
+.box-hex-lilly {
+  background-color: #ffaff0;
+}
+
+.padding-block-xs {
+  padding-block: 10px;
+}
+
+.margin-block-xs {
+  margin-block: 10px;
+}
+
+.padding-block-sm {
+  padding-block: 20px;
+}
+
+.margin-block-sm {
+  margin-block: 20px;
+}
+
+.padding-block-md {
+  padding-block: 30px;
+}
+
+.margin-block-md {
+  margin-block: 30px;
+}
+
+.padding-block-lg {
+  padding-block: 50px;
+}
+
+.margin-block-lg {
+  margin-block: 50px;
+}
+
+.padding-block-xl {
+  padding-block: 100px;
+}
+
+.margin-block-xl {
+  margin-block: 100px;
+}
+
+.padding-inline-xs {
+  padding-inline: 10px;
+}
+
+.margin-inline-xs {
+  margin-inline: 10px;
+}
+
+.padding-inline-sm {
+  padding-inline: 20px;
+}
+
+.margin-inline-sm {
+  margin-inline: 20px;
+}
+
+.padding-inline-md {
+  padding-inline: 30px;
+}
+
+.margin-inline-md {
+  margin-inline: 30px;
+}
+
+.padding-inline-lg {
+  padding-inline: 50px;
+}
+
+.margin-inline-lg {
+  margin-inline: 50px;
+}
+
+.padding-inline-xl {
+  padding-inline: 100px;
+}
+
+.margin-inline-xl {
+  margin-inline: 100px;
+}
+
 main .main-image {
   min-height: 20vh;
   background-image: url("https://images.unsplash.com/photo-1715464881844-a6de4a3b004c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
@@ -194,6 +334,14 @@ section:nth-of-type(2) {
   background-size: cover;
 }
 
+.box-7 {
+  width: 200px;
+  height: 400px;
+  display: inline-block;
+  vertical-align: bottom;
+  padding: 200px;
+}
+
 .custom-ps-1 {
   padding-inline-start: 0.5rem;
 }
@@ -232,148 +380,4 @@ section:nth-of-type(2) {
 
 .custom-ps-10 {
   padding-inline-start: 5rem;
-}
-
-.box-red {
-  background-color: red;
-}
-
-.box-green {
-  background-color: green;
-}
-
-.box-blue {
-  background-color: blue;
-}
-
-.box-yellow {
-  background-color: yellow;
-}
-
-.box-purple {
-  background-color: purple;
-}
-
-.box-orange {
-  background-color: orange;
-}
-
-.another-box-1 {
-  background-color: red;
-}
-
-.another-box-2 {
-  background-color: green;
-}
-
-.another-box-3 {
-  background-color: blue;
-}
-
-.another-box-4 {
-  background-color: yellow;
-}
-
-.another-box-5 {
-  background-color: purple;
-}
-
-.box-hex-red {
-  background-color: #ff0000;
-}
-
-.box-hex-green {
-  background-color: #008a00;
-}
-
-.box-hex-blue {
-  background-color: #0000fa;
-}
-
-.box-hex-orange {
-  background-color: #fa8210;
-}
-
-.box-hex-lilly {
-  background-color: #ffaff0;
-}
-
-.padding-inline-xs {
-  padding-inline: 10px;
-}
-
-.padding-block-xs {
-  padding-block: 10px;
-}
-
-.margin-inline-xs {
-  margin-inline: 10px;
-}
-
-.margin-block-xs {
-  margin-block: 10px;
-}
-
-.padding-inline-sm {
-  padding-inline: 20px;
-}
-
-.padding-block-sm {
-  padding-block: 20px;
-}
-
-.margin-inline-sm {
-  margin-inline: 20px;
-}
-
-.margin-block-sm {
-  margin-block: 20px;
-}
-
-.padding-inline-md {
-  padding-inline: 30px;
-}
-
-.padding-block-md {
-  padding-block: 30px;
-}
-
-.margin-inline-md {
-  margin-inline: 30px;
-}
-
-.margin-block-md {
-  margin-block: 30px;
-}
-
-.padding-inline-lg {
-  padding-inline: 50px;
-}
-
-.padding-block-lg {
-  padding-block: 50px;
-}
-
-.margin-inline-lg {
-  margin-inline: 50px;
-}
-
-.margin-block-lg {
-  margin-block: 50px;
-}
-
-.padding-inline-xl {
-  padding-inline: 100px;
-}
-
-.padding-block-xl {
-  padding-block: 100px;
-}
-
-.margin-inline-xl {
-  margin-inline: 100px;
-}
-
-.margin-block-xl {
-  margin-block: 100px;
 }/*# sourceMappingURL=style.css.map */

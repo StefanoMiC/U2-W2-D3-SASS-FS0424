@@ -1,0 +1,65 @@
+$colorList: red, green, blue, yellow, purple, orange;
+
+@each $color in $colorList {
+  .box-#{$color} {
+    background-color: $color;
+  }
+}
+
+$colorListHex: #ff0000, #008a00, #0000fa, #fa8210, #ffaff0;
+// @each $color in $colorListHex {
+// .box-hex-#{$color} { // ERRORE!
+//   background-color: $color;
+// }
+// }
+
+// questo sistema ci permette di avere sia un valore di indice a disposizione sia il valore dell'elemento di una lista
+@for $i from 1 to length($colorListHex) {
+  $color: nth($colorListHex, $i);
+
+  .another-box-#{$i} {
+    // .another-box-1,  .another-box-2,  .another-box-3 ecc...
+    background-color: $color; // background-color: red, background-color: green, background-color: blue, ecc...
+  }
+}
+// quando abbiamo a che fare con numeri in formato esadecimane, il sistema di applicare il valore della lista come suffisso
+// della nostra classe non funzione, ci dà errore.
+// a questo punto è forse più conveniente utilizzare un'altra struttura che è la mappa (una sorta di lista ma con coppie chiave-valore)
+
+$colorMapHex: (
+  red: #ff0000,
+  green: #008a00,
+  blue: #0000fa,
+  orange: #fa8210,
+  lilly: #ffaff0
+);
+
+// quando utilizziamo @each con una mappa dobbiamo prevedere due variabili invece che una,
+// la prima prenderà il valore della chiave la seconda quella del valore all'interno della stessa
+
+@each $key, $value in $colorMapHex {
+  .box-hex-#{$key} {
+    background-color: $value;
+  }
+}
+
+$sizes: (
+  xs: 10px,
+  sm: 20px,
+  md: 30px,
+  lg: 50px,
+  xl: 100px
+);
+
+$directions: block, inline;
+
+@each $dir in $directions {
+  @each $key, $value in $sizes {
+    .padding-#{$dir}-#{$key} {
+      padding-#{$dir}: $value;
+    }
+    .margin-#{$dir}-#{$key} {
+      margin-#{$dir}: $value;
+    }
+  }
+}
